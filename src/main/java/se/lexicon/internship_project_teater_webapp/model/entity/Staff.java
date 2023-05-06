@@ -1,8 +1,8 @@
 package se.lexicon.internship_project_teater_webapp.model.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,8 @@ import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Staff extends User {
@@ -18,17 +19,11 @@ public class Staff extends User {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
-    private String email;
 
+    @Column(unique = true, nullable = false, length = 30)
+    private String email;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Calendar> calendarList;
-
-    @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.REFRESH}
-    )
-    private List<Contact> contactInformation;
-
     private Role role;
 
     public Staff(String firstName, String lastName, LocalDate birthDate, List<Calendar> calendarList) {

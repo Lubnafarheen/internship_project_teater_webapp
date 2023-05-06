@@ -1,9 +1,14 @@
 package se.lexicon.internship_project_teater_webapp.model.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Member extends User  {
+public class Member extends User {
 
     private String firstName;
     private String lastName;
@@ -25,13 +30,8 @@ public class Member extends User  {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Event> events;
 
-    @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.REFRESH}
-    )
-    private List<Contact> contactInformation;
-
     private Role role;
+
     public Member(String firstName, String lastName, LocalDate birthDate, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
