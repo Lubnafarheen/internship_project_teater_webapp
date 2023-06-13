@@ -34,5 +34,12 @@ public class Staff extends User {
         this.role = Role.ROLE_STAFF;
     }
 
+    public Staff(String firstName, String lastName, LocalDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.role = Role.ROLE_STAFF;
+    }
+
 
 }
